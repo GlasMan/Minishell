@@ -13,6 +13,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+#include <dirent.h>
 
 int		ft_cd(char *cmd, char **env);
 void	ft_pwd(void);

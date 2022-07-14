@@ -42,10 +42,10 @@ int	main(int ac, char **av, char **env)
 	while(1)
 	{
 		command = readline(prompt(env));
-		if (command)
+		if (command != NULL)
 		{
 			cmd_lst = ft_split(command, ' ');
-			if (ft_strncmp(cmd_lst[0], "pwd", 2) == 0)
+			if (ft_strncmp(cmd_lst[0], "pwd", 3) == 0)
 				ft_pwd();
 			else if(ft_strncmp(cmd_lst[0], "env", 3) == 0)
 				ft_env(env);
@@ -56,8 +56,6 @@ int	main(int ac, char **av, char **env)
 			}
 			else if (ft_strncmp(cmd_lst[0], "exit", 4) == 0)
 				exit(1);
-			else
-				printf("%s\n", strerror(errno));
 		}
 		else
 			continue;

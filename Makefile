@@ -1,5 +1,5 @@
 NAME    = minishell
-CC = gcc -lreadline
+CC = gcc -lreadline -g
 INC = minishell.h
 CFLAGS =
 RM = rm -rf
