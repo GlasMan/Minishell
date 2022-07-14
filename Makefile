@@ -1,21 +1,25 @@
 NAME    = minishell
-CC = gcc -lreadline -ltinfo
+CC = gcc -lreadline
 INC = minishell.h
 CFLAGS =
 RM = rm -rf
+LIBFT	= libft/libft.a
+
 
 SRCS    =	ft_cd.c \
 			main.c \
 			ft_env.c \
 
-ARCPATH = "libft/libft.a"
-
 OBJS = $(SRCS:.c=.o)
+
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@$(CC) ${CFLAGS} $(OBJS) $(ARCPATH)  -o $(NAME)
+$(LIBFT):
+	make -C libft/
+
+$(NAME): $(OBJS) $(LIBFT)
+	@$(CC) ${CFLAGS} $(OBJS) $(LIBFT) -o $(NAME)
 	@echo shell is ready
 
 %.o: %.c $(INC)
@@ -24,10 +28,12 @@ $(NAME): $(OBJS)
 
 clean:
 	@$(RM) $(OBJS)
+	@make clean -C libft/
 	@echo $(R)Removed [$(OBJS)]
 
 fclean: clean
 	@$(RM) $(NAME)
+	@make fclean -C libft/
 	@echo $(R)Removed [$(NAME)]
 
 re: fclean all

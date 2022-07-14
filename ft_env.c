@@ -7,7 +7,7 @@ void    ft_env(char **env)
     i = 0;
     while (env[i])
     {
-        printf("%s\n", env[i]);
+        printf("\033[0;36m%s\n", env[i]);
         i++;
     }
 }

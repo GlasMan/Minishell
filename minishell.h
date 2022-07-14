@@ -12,8 +12,9 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 
-void    ft_cd(char *cmd, char **env);
+int		ft_cd(char *cmd, char **env);
 void	ft_pwd(void);
-void    ft_env(char **env);
+void	ft_env(char **env);
 #endif
