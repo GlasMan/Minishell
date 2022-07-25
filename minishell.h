@@ -18,4 +18,5 @@
 int		ft_cd(char *cmd, char **env);
 void	ft_pwd(void);
 void	ft_env(char **env);
+void	ft_echo(char **arg, int fd);
 #endif

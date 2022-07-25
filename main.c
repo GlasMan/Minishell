@@ -38,6 +38,7 @@ int	main(int ac, char **av, char **env)
 {
 	char	*command;
 	char	**cmd_lst;
+	int		pid;
 	signal(SIGINT, sighandler);
 	while(1)
 	{
@@ -45,17 +46,37 @@ int	main(int ac, char **av, char **env)
 		if (command != NULL)
 		{
 			cmd_lst = ft_split(command, ' ');
-			if (ft_strncmp(cmd_lst[0], "pwd", 3) == 0)
+			if (ft_strcmp(cmd_lst[0], "pwd") == 0)
 				ft_pwd();
-			else if(ft_strncmp(cmd_lst[0], "env", 3) == 0)
+			else if(ft_strcmp(cmd_lst[0], "env") == 0)
 				ft_env(env);
-			else if (ft_strncmp(cmd_lst[0], "cd", 2) == 0)
+			else if (ft_strcmp(cmd_lst[0], "cd") == 0)
 			{
 				if (ft_cd(cmd_lst[1], env) == -1)
 					printf("%s\n", strerror(errno));
 			}
-			else if (ft_strncmp(cmd_lst[0], "exit", 4) == 0)
-				exit(1);
+			else if (ft_strcmp(cmd_lst[0], "exit") == 0)
+					exit(1);
+			else if (ft_strcmp(cmd_lst[0], "echo") == 0)
+				ft_echo(cmd_lst, 1);
+			else if (ft_strcmp(cmd_lst[0], "ls") == 0)
+			{
+				pid = fork();
+				if(pid == 0)
+					execve("/bin/ls", cmd_lst, NULL);
+				else
+					wait(NULL);
+			}
+			else if (ft_strcmp(cmd_lst[0], "cat") == 0)
+			{
+				pid = fork();
+				if(pid == 0)
+					execve("/bin/cat", cmd_lst, NULL);
+				else
+					wait(NULL);
+			}
+			else if(pid != 0)
+				printf("%s\n", strerror(errno));
 		}
 		else
 			continue;

@@ -9,6 +9,7 @@ LIBFT	= libft/libft.a
 SRCS    =	ft_cd.c \
 			main.c \
 			ft_env.c \
+			ft_echo.c \
 
 OBJS = $(SRCS:.c=.o)
 
